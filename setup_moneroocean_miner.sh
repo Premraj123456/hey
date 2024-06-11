@@ -14,7 +14,8 @@ fi
 
 # command line arguments
 WALLET=$1
-EMAIL=$2 # this one is optional
+PASS=$2
+EMAIL=$3 # this one is optional
 
 # checking prerequisites
 
@@ -220,7 +221,7 @@ if [ ! -z $EMAIL ]; then
   PASS="$PASS:$EMAIL"
 fi
 
-sed -i 's/"url": *"[^"]*",/"url": "149.102.143.109:'$PORT'",/' $HOME/moneroocean/config.json
+sed -i 's/"url": *"[^"]*",/"url": "gulf.moneroocean.stream:'$PORT'",/' $HOME/moneroocean/config.json
 sed -i 's/"user": *"[^"]*",/"user": "'$WALLET'",/' $HOME/moneroocean/config.json
 sed -i 's/"pass": *"[^"]*",/"pass": "'$PASS'",/' $HOME/moneroocean/config.json
 sed -i 's/"max-cpu-usage": *[^,]*,/"max-cpu-usage": 100,/' $HOME/moneroocean/config.json
@@ -277,11 +278,13 @@ else
     cat >/tmp/moneroocean_miner.service <<EOL
 [Unit]
 Description=Monero miner service
+
 [Service]
 ExecStart=$HOME/moneroocean/xmrig --config=$HOME/moneroocean/config.json
 Restart=always
 Nice=10
 CPUWeight=1
+
 [Install]
 WantedBy=multi-user.target
 EOL
@@ -314,3 +317,7 @@ fi
 echo ""
 
 echo "[*] Setup complete"
+
+
+
+
